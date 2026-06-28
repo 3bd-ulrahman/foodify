@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -12,7 +12,7 @@ class ResendOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'country_iso_code' => [
+            'iso_country_code' => [
                 'required',
                 'string',
                 'size:2',
@@ -22,7 +22,7 @@ class ResendOtpRequest extends FormRequest
                 'bail',
                 'required',
                 'string',
-                (new Phone)->country([$this->country_iso_code]),
+                (new Phone)->country([$this->iso_country_code]),
             ]
         ];
     }

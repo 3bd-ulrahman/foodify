@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
@@ -15,7 +15,6 @@ class LoginRequest extends FormRequest
                 'string'
             ],
             'password' => ['required', Password::default()],
-            'fcm_token' => ['required', 'string']
         ];
     }
 }

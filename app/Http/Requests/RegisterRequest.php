@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +15,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:10', 'max:255'],
+            'name' => ['required', 'string', 'min:10', 'max:100'],
             /**
              * The iso country code for mobile number
              *
@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
              *
              * @example EG
              */
-            'country_iso_code' => [
+            'iso_country_code' => [
                 'required',
                 'string',
                 'size:2',
@@ -38,9 +38,9 @@ class RegisterRequest extends FormRequest
                 'bail',
                 'required',
                 'string',
-                (new Phone)->country([$this->country_iso_code]),
+                (new Phone)->country([$this->iso_country_code]),
                 function (string $attribute, mixed $value, \Closure $fail) {
-                    $formatted = (new PhoneNumber($value, $this->country_iso_code))->formatE164();
+                    $formatted = (new PhoneNumber($value, $this->iso_country_code))->formatE164();
 
                     $exists = DB::table('users')->where('phone', $formatted)->exists();
 

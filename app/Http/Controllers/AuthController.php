@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Actions\Auth\LoginUser;
 use App\Actions\Auth\RegisterUser;
@@ -9,12 +9,12 @@ use App\Actions\Auth\ResetPassword;
 use App\Actions\Auth\SendOtp;
 use App\Actions\Auth\VerifyOtp;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\ForgotPasswordRequest;
-use App\Http\Requests\Api\LoginRequest;
-use App\Http\Requests\Api\RegisterRequest;
-use App\Http\Requests\Api\ResendOtpRequest;
-use App\Http\Requests\Api\ResetPasswordRequest;
-use App\Http\Requests\Api\VerifyOtpRequest;
+use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResendOtpRequest;
+use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\VerifyOtpRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,7 +67,7 @@ class AuthController extends Controller
 
     public function resendOtp(ResendOtpRequest $request, ResendOtp $action): JsonResponse
     {
-        $action->handle($request->phone, $request->country_iso_code);
+        $action->handle($request->phone, $request->iso_country_code);
 
         return response()->json(['message' => __('auth.otp_resent')]);
     }

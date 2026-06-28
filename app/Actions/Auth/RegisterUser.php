@@ -11,7 +11,7 @@ class RegisterUser
 
     public function handle(array $data): User
     {
-        $phone = (new PhoneNumber($data['phone'], $data['country_iso_code']))->formatE164();
+        $phone = (new PhoneNumber($data['phone'], $data['iso_country_code']))->formatE164();
 
         $user = User::query()->create([
             'name' => $data['name'],
