@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Requests\Api;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class VerifyOtpRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'phone' => ['required'],
+            'otp' => ['required', 'digits:6'],
+            'purpose' => ['required', Rule::in(['registration', 'password_reset'])],
+            'fcm_token' => ['required_if:purpose,registration', 'string']
+        ];
+    }
+}
