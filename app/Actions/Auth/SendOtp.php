@@ -17,9 +17,8 @@ class SendOtp
         // $otp = (string) random_int(100000, 999999);
         $otp = '123456';
 
-        defer(function () use ($phone, $otp) {
-            Tawhub::send_text(ltrim($phone, '+'), 'Welcome to city view, your OTP is: ' . $otp);
-        });
+        // TODO:
+        // send otp
 
         Cache::put("{$purpose}_otp_{$phone}", [
             'otp' => Hash::make($otp),
