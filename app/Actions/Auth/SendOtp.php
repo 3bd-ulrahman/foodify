@@ -4,7 +4,6 @@ namespace App\Actions\Auth;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
-use Tawhub\Laravel\Facades\Tawhub;
 
 class SendOtp
 {
@@ -23,7 +22,7 @@ class SendOtp
         Cache::put("{$purpose}_otp_{$phone}", [
             'otp' => Hash::make($otp),
             'attempts' => 0,
-            'expires_at' => now()->addMinutes(5)
+            'expires_at' => now()->addMinutes(5),
         ], now()->addMinutes(5));
     }
 }

@@ -13,7 +13,7 @@ class ResetPasswordRequest extends FormRequest
             'phone' => ['required'],
             'reset_token' => ['required', 'string'],
             'password' => ['required', 'confirmed', Password::defaults()],
-            'fcm_token' => ['required', 'string']
+            'fcm_token' => ['required', 'string'],
         ];
     }
 }

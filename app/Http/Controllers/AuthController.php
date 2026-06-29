@@ -8,7 +8,6 @@ use App\Actions\Auth\ResendOtp;
 use App\Actions\Auth\ResetPassword;
 use App\Actions\Auth\SendOtp;
 use App\Actions\Auth\VerifyOtp;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;

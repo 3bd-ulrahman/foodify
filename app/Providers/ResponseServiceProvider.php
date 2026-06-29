@@ -35,8 +35,8 @@ class ResponseServiceProvider extends ServiceProvider
                 'paginate' => $isPaginated ? [
                     'per_page' => $data->resource->perPage(),
                     'current_page' => $data->resource->currentPage(),
-                    'last_page' => $data->resource->lastPage()
-                ] : null
+                    'last_page' => $data->resource->lastPage(),
+                ] : null,
             ], $status);
         };
 
