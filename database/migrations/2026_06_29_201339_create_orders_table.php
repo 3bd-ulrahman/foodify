@@ -15,7 +15,9 @@ return new class extends Migration
             $table->decimal('delivery_fee', 10, 2);
             $table->decimal('total', 10, 2);
             $table->string('delivery_address');
-            $table->string('status')->default('pending');
+            $table->enum('status', [
+                'pending', 'preparing', 'out_for_delivery', 'delivered', 'cancelled',
+            ])->default('pending');
             $table->timestamps();
         });
     }

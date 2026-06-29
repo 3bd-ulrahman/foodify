@@ -55,14 +55,14 @@ class VerifyOtp
         $user = User::query()->where('phone', $phone)->firstOrFail();
 
         $user->forceFill([
-            'phone_verified_at' => now()
+            'phone_verified_at' => now(),
         ])->save();
 
         $accessToken = $user->createToken($user->phone);
 
         return [
             'user' => $user,
-            'token' => $accessToken->plainTextToken
+            'token' => $accessToken->plainTextToken,
         ];
     }
 

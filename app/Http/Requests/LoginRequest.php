@@ -12,7 +12,7 @@ class LoginRequest extends FormRequest
         return [
             'phone' => [
                 'required',
-                'string'
+                'string',
             ],
             'password' => ['required', Password::default()],
         ];
