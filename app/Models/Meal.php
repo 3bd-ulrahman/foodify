@@ -4,13 +4,19 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Database\Factories\MealFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[UseFactory(MealFactory::class)]
 class Meal extends Model
 {
+    use HasFactory;
+
     protected $table = 'meals';
 
     protected $fillable = [
