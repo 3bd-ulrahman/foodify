@@ -13,7 +13,6 @@ class VerifyOtpRequest extends FormRequest
             'phone' => ['required'],
             'otp' => ['required', 'digits:6'],
             'purpose' => ['required', Rule::in(['registration', 'password_reset'])],
-            'fcm_token' => ['required_if:purpose,registration', 'string']
         ];
     }
 }

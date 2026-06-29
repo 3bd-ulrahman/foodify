@@ -59,7 +59,6 @@ class AuthController extends Controller
             $request->phone,
             $request->otp,
             $request->purpose,
-            $request->string('fcm_token')->toString()
         );
 
         return response()->success('OTP verified', $result);
