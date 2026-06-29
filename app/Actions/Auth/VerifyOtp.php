@@ -16,7 +16,7 @@ class VerifyOtp
      * @param  'registration'|'password_reset'  $purpose
      * @return array{user?: User, token?: string, reset_token?: string}
      */
-    public function handle(string $phone, string $otp, string $purpose, string $fcmToken = ''): array
+    public function handle(string $phone, string $otp, string $purpose): array
     {
         $key = "{$purpose}_otp_{$phone}";
         $cached = Cache::get($key);
@@ -41,7 +41,7 @@ class VerifyOtp
         Cache::forget($key);
 
         if ($purpose === 'registration') {
-            return $this->handleRegistrationVerification($phone, $fcmToken);
+            return $this->handleRegistrationVerification($phone);
         }
 
         return $this->handlePasswordResetVerification($phone);
@@ -50,7 +50,7 @@ class VerifyOtp
     /**
      * @return array{user: User, token: string}
      */
-    private function handleRegistrationVerification(string $phone, string $fcmToken = ''): array
+    private function handleRegistrationVerification(string $phone): array
     {
         $user = User::query()->where('phone', $phone)->firstOrFail();
 
@@ -59,10 +59,6 @@ class VerifyOtp
         ])->save();
 
         $accessToken = $user->createToken($user->phone);
-
-        $accessToken->accessToken->forceFill([
-            'fcm_token' => $fcmToken,
-        ])->save();
 
         return [
             'user' => $user,
