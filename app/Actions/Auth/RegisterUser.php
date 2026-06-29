@@ -16,7 +16,7 @@ class RegisterUser
         $user = User::query()->create([
             'name' => $data['name'],
             'phone' => $phone,
-            'password' => $data['password']
+            'password' => $data['password'],
         ]);
 
         $this->sendOtp->handle($phone, 'registration');
