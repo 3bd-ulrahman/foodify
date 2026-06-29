@@ -33,10 +33,6 @@ class ResetPassword
 
             $accessToken = $user->createToken($user->phone);
 
-            $accessToken->accessToken->forceFill([
-                'fcm_token' => $data['fcm_token'],
-            ])->save();
-
             DB::afterCommit(fn () => Cache::forget($cacheKey));
 
             return [
