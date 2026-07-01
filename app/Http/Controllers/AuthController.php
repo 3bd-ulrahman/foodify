@@ -33,7 +33,7 @@ class AuthController extends Controller
     {
         $result = $action->handle($request->validated());
 
-        return response()->success('Logged in successfully', $result);
+        return \Illuminate\Http\Response::success($result, 'Logged in successfully');
     }
 
     public function logout(): JsonResponse
@@ -60,7 +60,7 @@ class AuthController extends Controller
             $request->purpose,
         );
 
-        return response()->success('OTP verified', $result);
+        return response()->success($result, 'OTP verified');
     }
 
     public function resendOtp(ResendOtpRequest $request, ResendOtp $action): JsonResponse
