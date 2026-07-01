@@ -42,7 +42,7 @@ class ResponseServiceProvider extends ServiceProvider
 
         // --- Success Macros ---
 
-        Response::macro('success', function ($message = null, $data = null) use ($buildResponse): JsonResponse {
+        Response::macro('success', function ($data = null, $message = null) use ($buildResponse): JsonResponse {
             return $buildResponse(true, Status::HTTP_OK, $message, $data);
         });
 

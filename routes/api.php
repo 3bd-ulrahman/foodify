@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,6 @@ Route::post('resend-otp', [AuthController::class, 'resendOtp'])
     ->name('otp.resend')
     ->middleware(['throttle:3,1', 'guest']);
 Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+
+// categories
+Route::apiResource('categories', CategoryController::class);
