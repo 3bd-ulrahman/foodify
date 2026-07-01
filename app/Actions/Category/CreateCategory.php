@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions\Category;
 
-use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 
 class CreateCategory
