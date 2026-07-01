@@ -35,14 +35,14 @@ class ResponseServiceProvider extends ServiceProvider
                 'paginate' => $isPaginated ? [
                     'per_page' => $data->resource->perPage(),
                     'current_page' => $data->resource->currentPage(),
-                    'last_page' => $data->resource->lastPage()
-                ] : null
+                    'last_page' => $data->resource->lastPage(),
+                ] : null,
             ], $status);
         };
 
         // --- Success Macros ---
 
-        Response::macro('success', function ($message = null, $data = null) use ($buildResponse): JsonResponse {
+        Response::macro('success', function ($data = null, $message = null) use ($buildResponse): JsonResponse {
             return $buildResponse(true, Status::HTTP_OK, $message, $data);
         });
 

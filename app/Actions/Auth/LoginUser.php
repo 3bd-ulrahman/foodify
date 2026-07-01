@@ -25,13 +25,9 @@ class LoginUser
 
         $accessToken = $user->createToken($user->phone);
 
-        $accessToken->accessToken->forceFill([
-            'fcm_token' => $data['fcm_token']
-        ])->save();
-
         return [
             'user' => $user,
-            'token' => $accessToken->plainTextToken
+            'token' => $accessToken->plainTextToken,
         ];
     }
 }

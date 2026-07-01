@@ -16,14 +16,14 @@ class ResendOtpRequest extends FormRequest
                 'required',
                 'string',
                 'size:2',
-                Rule::in(PhoneNumberUtil::getInstance()->getSupportedRegions())
+                Rule::in(PhoneNumberUtil::getInstance()->getSupportedRegions()),
             ],
             'phone' => [
                 'bail',
                 'required',
                 'string',
                 (new Phone)->country([$this->iso_country_code]),
-            ]
+            ],
         ];
     }
 }

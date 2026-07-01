@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
                 'required',
                 'string',
                 'size:2',
-                Rule::in(PhoneNumberUtil::getInstance()->getSupportedRegions())
+                Rule::in(PhoneNumberUtil::getInstance()->getSupportedRegions()),
             ],
             /**
              * @var string
@@ -47,14 +47,14 @@ class RegisterRequest extends FormRequest
                     if ($exists) {
                         $fail(__('validation.unique', ['attribute' => $attribute]));
                     }
-                }
+                },
             ],
             /**
              * @var string
              *
              * @example 5648Abdulrahman@
              */
-            'password' => ['required', 'confirmed', Password::defaults()]
+            'password' => ['required', 'confirmed', Password::defaults()],
         ];
     }
 }
