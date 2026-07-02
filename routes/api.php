@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
 // Auth
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('refresh', [AuthController::class, 'refresh'])->middleware([
+    'auth:sanctum',
+    'ability:' . TokenAbility::ISSUE_ACCESS_TOKEN->value,
+]);
 Route::delete('logout', [AuthController::class, 'logout'])->middleware([
     'auth:sanctum',
     'ability:' . TokenAbility::ACCESS_API->value,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Auth\IssueTokens;
 use App\Actions\Auth\LoginUser;
 use App\Actions\Auth\RegisterUser;
 use App\Actions\Auth\ResendOtp;
@@ -34,6 +35,22 @@ class AuthController extends Controller
         $result = $action->handle($request->validated());
 
         return response()->success($result, 'Logged in successfully');
+    }
+
+    public function refresh(IssueTokens $action): JsonResponse
+    {
+        $user = auth()->user();
+        $current = $user->currentAccessToken();
+
+        // if refresh token used for second time this may mean that token was leaked, so delete all other tokens
+        if (!$current) {
+            $user->tokens()->delete();
+            abort(Response::HTTP_UNAUTHORIZED, 'No active access token found.');
+        }
+
+        $tokens = $action->handle($user);
+
+        return response()->success($tokens, 'Access token refreshed successfully');
     }
 
     public function logout(): JsonResponse
