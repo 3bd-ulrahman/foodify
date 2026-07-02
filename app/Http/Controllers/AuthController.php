@@ -43,7 +43,7 @@ class AuthController extends Controller
         $current = $user->currentAccessToken();
 
         // if refresh token used for second time this may mean that token was leaked, so delete all other tokens
-        if (!$current) {
+        if (! $current) {
             $user->tokens()->delete();
             abort(Response::HTTP_UNAUTHORIZED, 'No active access token found.');
         }

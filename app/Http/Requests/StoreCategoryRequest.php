@@ -17,7 +17,7 @@ class StoreCategoryRequest extends FormRequest
                 'string',
                 'min:3',
                 'max:255',
-                Rule::unique('categories', 'name')
+                Rule::unique('categories', 'name'),
             ],
         ];
     }

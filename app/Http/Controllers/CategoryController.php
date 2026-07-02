@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Actions\Category\DeleteCategory;
 use App\Actions\Category\CreateCategory;
+use App\Actions\Category\DeleteCategory;
 use App\Actions\Category\UpdateCategory;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function index(Request $request): AnonymousResourceCollection
     {
         $request->validate([
-            'per_page' => [Pagination::PER_PAGE_RULES]
+            'per_page' => [Pagination::PER_PAGE_RULES],
         ]);
 
         $categories = Category::query()->paginate($request->integer('per_page', Pagination::DEFAULT_PER_PAGE));

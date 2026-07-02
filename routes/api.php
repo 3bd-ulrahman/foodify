@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MealController;
 use App\Support\TokenAbility;
 use Illuminate\Support\Facades\Route;
 
@@ -10,11 +11,11 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('refresh', [AuthController::class, 'refresh'])->middleware([
     'auth:sanctum',
-    'ability:' . TokenAbility::ISSUE_ACCESS_TOKEN->value,
+    'ability:'.TokenAbility::ISSUE_ACCESS_TOKEN->value,
 ]);
 Route::delete('logout', [AuthController::class, 'logout'])->middleware([
     'auth:sanctum',
-    'ability:' . TokenAbility::ACCESS_API->value,
+    'ability:'.TokenAbility::ACCESS_API->value,
 ]);
 Route::post('forgot-password', [AuthController::class, 'forgotPassword'])
     ->name('password.forgot')
@@ -27,3 +28,6 @@ Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('p
 
 // categories
 Route::apiResource('categories', CategoryController::class);
+
+// products
+Route::apiResource('meals', MealController::class);
