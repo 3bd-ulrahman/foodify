@@ -20,6 +20,7 @@ class Meal extends Model
     protected $table = 'meals';
 
     protected $fillable = [
+        'category_id',
         'name',
         'description',
         'price',
@@ -28,7 +29,6 @@ class Meal extends Model
         'carbs_grams',
         'fat_grams',
         'fiber_grams',
-        'category_id',
     ];
 
     // Relationships

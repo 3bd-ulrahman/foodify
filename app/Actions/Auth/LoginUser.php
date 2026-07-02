@@ -3,7 +3,6 @@
 namespace App\Actions\Auth;
 
 use App\Models\User;
-use App\Support\TokenAbility;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -26,7 +25,7 @@ class LoginUser
 
         return [
             'user' => $user,
-            'tokens' => (app(IssueTokens::class)->handle($user))
+            'tokens' => (app(IssueTokens::class)->handle($user)),
         ];
     }
 }
