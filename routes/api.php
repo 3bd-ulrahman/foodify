@@ -2,17 +2,16 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
-use Illuminate\Http\Request;
+use App\Support\TokenAbility;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
 // Auth
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::delete('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
+Route::delete('logout', [AuthController::class, 'logout'])->middleware([
+    'auth:sanctum',
+    'ability:' . TokenAbility::ACCESS_API->value,
+]);
 Route::post('forgot-password', [AuthController::class, 'forgotPassword'])
     ->name('password.forgot')
     ->middleware(['throttle:3,1', 'guest']);

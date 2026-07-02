@@ -33,7 +33,7 @@ class AuthController extends Controller
     {
         $result = $action->handle($request->validated());
 
-        return \Illuminate\Http\Response::success($result, 'Logged in successfully');
+        return response()->success($result, 'Logged in successfully');
     }
 
     public function logout(): JsonResponse
