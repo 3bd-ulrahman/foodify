@@ -50,7 +50,12 @@ return [
     |
     */
 
-    'expiration' => null,
+    'expiration' => 60,
+
+    /**
+     * refresh token expiration in days
+     */
+    'refresh_token_expiration' => 7,
 
     /*
     |--------------------------------------------------------------------------

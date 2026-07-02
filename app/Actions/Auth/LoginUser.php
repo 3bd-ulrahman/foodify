@@ -3,6 +3,7 @@
 namespace App\Actions\Auth;
 
 use App\Models\User;
+use App\Support\TokenAbility;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -23,11 +24,9 @@ class LoginUser
             throw ValidationException::withMessages(['phone' => __('auth.unverified')]);
         }
 
-        $accessToken = $user->createToken($user->phone);
-
         return [
             'user' => $user,
-            'token' => $accessToken->plainTextToken,
+            'tokens' => (app(IssueTokens::class)->handle($user))
         ];
     }
 }
