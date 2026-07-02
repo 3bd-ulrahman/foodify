@@ -14,11 +14,13 @@ use App\Models\Category;
 use App\Support\Pagination;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\JsonApi\JsonApiResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): AnonymousResourceCollection
     {
         $request->validate([
             'per_page' => [Pagination::PER_PAGE_RULES]
@@ -26,32 +28,40 @@ class CategoryController extends Controller
 
         $categories = Category::query()->paginate($request->integer('per_page', Pagination::DEFAULT_PER_PAGE));
 
-        return response()->success(CategoryResource::collection($categories));
+        return CategoryResource::collection($categories);
     }
 
     public function store(StoreCategoryRequest $request, CreateCategory $action): JsonResponse
     {
         $category = $action->handle($request->validated());
 
-        return response()->created(
-            'Category created successfully',
-            new CategoryResource($category)
-        );
+        return CategoryResource::make($category)
+            ->additional([
+                'meta' => [
+                    'message' => 'Category created successfully.',
+                ],
+            ])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function show(Category $category): JsonResponse
+    public function show(Category $category): JsonApiResource
     {
-        return response()->success(new CategoryResource($category));
+        return CategoryResource::make($category);
     }
 
     public function update(UpdateCategoryRequest $request, Category $category, UpdateCategory $action): JsonResponse
     {
         $category = $action->handle($category, $request->validated());
 
-        return response()->success(
-            new CategoryResource($category),
-            'Category updated successfully'
-        );
+        return CategoryResource::make($category)
+            ->additional([
+                'meta' => [
+                    'message' => 'Category updated successfully.',
+                ],
+            ])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     public function destroy(Category $category, DeleteCategory $action): Response
