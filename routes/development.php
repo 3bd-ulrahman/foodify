@@ -12,6 +12,6 @@ Route::get('middlewares', function () {
     return app('router')->getMiddleware();
 });
 
-Route::get('/api/test', function () {
-    return auth()->user()->currentAccessToken();
-})->middleware('auth:sanctum');
+Route::get('/test', function () {
+    //
+});
