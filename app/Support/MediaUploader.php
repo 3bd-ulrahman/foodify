@@ -15,10 +15,6 @@ class MediaUploader
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).'.webp';
 
         /** @phpstan-ignore-next-line */
-        /** @var Model&HasMedia&object{
-         *     addMediaFromString(string): FileAdder
-         * } $model
-         */
         $model->addMediaFromString($webpContent)
             ->usingFileName($fileName)
             ->toMediaCollection($collection);
