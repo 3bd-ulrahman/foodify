@@ -47,11 +47,6 @@ class CartItemController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function show(CartItem $cartItem): JsonApiResource
-    {
-        return CartItemResource::make($cartItem);
-    }
-
     public function update(UpdateCartItemRequest $request, CartItem $cartItem, UpdateCartItem $action): JsonResponse
     {
         $cartItem = $action->handle($cartItem, $request->validated());
