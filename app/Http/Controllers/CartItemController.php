@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\Cart\CreateCartItem;
-use App\Actions\Cart\DecrementCartItem;
 use App\Actions\Cart\DeleteCartItem;
-use App\Actions\Cart\IncrementCartItem;
 use App\Actions\Cart\UpdateCartItem;
 use App\Http\Requests\StoreCartItemRequest;
 use App\Http\Requests\UpdateCartItemRequest;
@@ -17,7 +15,6 @@ use App\Support\Pagination;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 use Symfony\Component\HttpFoundation\Response;
 
 class CartItemController extends Controller
