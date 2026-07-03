@@ -50,6 +50,9 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class, 'user_id', 'id');
     }
 
+    /**
+     * @return HasOne<Cart, $this>
+     */
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class, 'user_id', 'id');

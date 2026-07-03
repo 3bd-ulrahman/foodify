@@ -8,9 +8,6 @@ use Illuminate\Validation\ValidationException;
 
 class LoginUser
 {
-    /**
-     * @return array{user: User, token: string}
-     */
     public function handle(array $data): array
     {
         $user = User::query()->where('phone', $data['phone'])->first();
