@@ -32,7 +32,7 @@ class CartItemController extends Controller
 
     public function store(StoreCartItemRequest $request, CreateCartItem $action): JsonResponse
     {
-        $cartItem = $action->handle($request->validated());
+        $cartItem = $action->handle($request->validated(), auth()->user());
 
         return CartItemResource::make($cartItem)
             ->additional([
@@ -46,7 +46,7 @@ class CartItemController extends Controller
 
     public function update(UpdateCartItemRequest $request, CartItem $cartItem, UpdateCartItem $action): JsonResponse
     {
-        $cartItem = $action->handle($cartItem, $request->validated());
+        $cartItem = $action->handle($request->validated(), $cartItem);
 
         return CartItemResource::make($cartItem)
             ->additional([

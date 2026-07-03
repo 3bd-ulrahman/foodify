@@ -8,9 +8,11 @@ use App\Models\CartItem;
 
 class UpdateCartItem
 {
-    public function handle(CartItem $cartItem, array $data): CartItem
+    public function handle(array $data, CartItem $cartItem): CartItem
     {
-        $cartItem->update($data);
+        $cartItem->update([
+            'quantity' => $data['quantity']
+        ]);
 
         return $cartItem;
     }
