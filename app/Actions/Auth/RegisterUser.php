@@ -19,6 +19,8 @@ class RegisterUser
             'password' => $data['password'],
         ]);
 
+        $user->cart()->create();
+
         $this->sendOtp->handle($phone, 'registration');
 
         return $user;
