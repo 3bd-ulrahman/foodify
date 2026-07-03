@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MealController;
 use App\Support\TokenAbility;
@@ -31,3 +32,6 @@ Route::apiResource('categories', CategoryController::class);
 
 // products
 Route::apiResource('meals', MealController::class);
+
+// cart items
+Route::apiResource('cart-items', CartItemController::class);

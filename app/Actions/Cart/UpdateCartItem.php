@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Actions\Cart;
+
+use App\Models\CartItem;
+
+class UpdateCartItem
+{
+    public function handle(CartItem $cartItem, array $data): CartItem
+    {
+        $cartItem->update($data);
+
+        return $cartItem;
+    }
+}
