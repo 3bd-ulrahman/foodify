@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MealController;
@@ -33,5 +34,12 @@ Route::apiResource('categories', CategoryController::class);
 // products
 Route::apiResource('meals', MealController::class);
 
-// cart items
-Route::apiResource('cart-items', CartItemController::class);
+Route::middleware(['auth:sanctum', 'ability:'. TokenAbility::ACCESS_API->value])->group(function () {
+    // cart items
+    Route::apiResource('cart-items', CartItemController::class);
+    Route::post('cart-items/{cart_item}/increment', [CartItemController::class, 'increment']);
+    Route::post('cart-items/{cart_item}/decrement', [CartItemController::class, 'decrement']);
+
+    // cart
+    Route::delete('carts/{cart}/clear', [CartController::class, 'clear']);
+});

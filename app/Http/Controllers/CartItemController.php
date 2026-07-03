@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\Cart\CreateCartItem;
+use App\Actions\Cart\DecrementCartItem;
 use App\Actions\Cart\DeleteCartItem;
+use App\Actions\Cart\IncrementCartItem;
 use App\Actions\Cart\UpdateCartItem;
 use App\Http\Requests\StoreCartItemRequest;
 use App\Http\Requests\UpdateCartItemRequest;
@@ -69,5 +71,42 @@ class CartItemController extends Controller
         $action->handle($cartItem);
 
         return response()->noContent();
+    }
+
+    public function increment(CartItem $cartItem, IncrementCartItem $action): JsonResponse
+    {
+        $cartItem = $action->handle($cartItem);
+
+        return CartItemResource::make($cartItem)
+            ->additional([
+                'meta' => [
+                    'message' => 'Cart item quantity incremented successfully.',
+                ],
+            ])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function decrement(CartItem $cartItem, DecrementCartItem $action): JsonResponse
+    {
+        $cartItem = $action->handle($cartItem);
+
+        if ($cartItem === null) {
+            return response()->json([
+                'data' => null,
+                'meta' => [
+                    'message' => 'Cart item removed successfully.',
+                ],
+            ], Response::HTTP_OK);
+        }
+
+        return CartItemResource::make($cartItem)
+            ->additional([
+                'meta' => [
+                    'message' => 'Cart item quantity decremented successfully.',
+                ],
+            ])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }
