@@ -37,8 +37,6 @@ Route::apiResource('meals', MealController::class);
 Route::middleware(['auth:sanctum', 'ability:'. TokenAbility::ACCESS_API->value])->group(function () {
     // cart items
     Route::apiResource('cart-items', CartItemController::class)->except('show');
-    Route::post('cart-items/{cart_item}/increment', [CartItemController::class, 'increment']);
-    Route::post('cart-items/{cart_item}/decrement', [CartItemController::class, 'decrement']);
 
     // cart
     Route::delete('carts/{cart}/clear', [CartController::class, 'clear']);
