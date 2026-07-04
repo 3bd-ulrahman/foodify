@@ -44,4 +44,5 @@ Route::middleware(['auth:sanctum', 'ability:'.TokenAbility::ACCESS_API->value])-
 
     // orders
     Route::get('orders', [OrderController::class, 'index']);
+    Route::post('orders', [OrderController::class, 'store']);
 });
