@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\Order\CreateOrder;
+use App\Actions\Order\UpdateOrder;
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Support\Pagination;
@@ -40,5 +42,19 @@ class OrderController extends Controller
             ])
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function update(UpdateOrderRequest $request, Order $order, UpdateOrder $action): JsonResponse
+    {
+        $order = $action->handle($request->validated(), $order);
+
+        return OrderResource::make($order)
+            ->additional([
+                'meta' => [
+                    'message' => 'Order updated successfully.',
+                ],
+            ])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }
