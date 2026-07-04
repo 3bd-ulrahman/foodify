@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MealController;
+use App\Http\Controllers\OrderController;
 use App\Support\TokenAbility;
 use Illuminate\Support\Facades\Route;
 
@@ -34,10 +35,13 @@ Route::apiResource('categories', CategoryController::class);
 // products
 Route::apiResource('meals', MealController::class);
 
-Route::middleware(['auth:sanctum', 'ability:'. TokenAbility::ACCESS_API->value])->group(function () {
+Route::middleware(['auth:sanctum', 'ability:'.TokenAbility::ACCESS_API->value])->group(function () {
     // cart items
     Route::apiResource('cart-items', CartItemController::class)->except('show');
 
     // cart
     Route::delete('carts/{cart}/clear', [CartController::class, 'clear']);
+
+    // orders
+    Route::get('orders', [OrderController::class, 'index']);
 });

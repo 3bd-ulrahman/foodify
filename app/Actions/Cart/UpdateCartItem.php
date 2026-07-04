@@ -11,7 +11,7 @@ class UpdateCartItem
     public function handle(array $data, CartItem $cartItem): CartItem
     {
         $cartItem->update([
-            'quantity' => $data['quantity']
+            'quantity' => $data['quantity'],
         ]);
 
         return $cartItem;
